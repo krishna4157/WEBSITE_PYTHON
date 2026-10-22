@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Vireo Modulars and Interiors | Crafting Space Since 2015</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <!-- High-end luxury editorial fonts: Bodoni Moda & Montserrat -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bw {
+            display: inline-block;
+            will-change: transform, filter, opacity;
+        }
+
+        /* Luxury Gold Diamond Arrow with Light Glow Trail */
+        @media (pointer: fine) {
+
+            body,
+            a,
+            button,
+            input,
+            textarea,
+            [onclick],
+            .glass-liquid,
+            .glass-card-hero,
+            .glass-card-about,
+            .glass-card-service,
+            .glass-card-why {
+                cursor: none !important;
+            }
+        }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            pointer-events: none;
+            z-index: 2147483647;
+            transform: translate(-2px, -2px);
+            filter: drop-shadow(0 3px 10px rgba(212, 175, 55, 0.6));
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.cursor-hover .custom-cursor {
+            transform: translate(-2px, -2px) scale(1.25) rotate(-10deg);
+        }
+
+        .custom-cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle,
+                    rgba(252, 238, 167, 0.9) 0%,
+                    rgba(212, 175, 55, 0.3) 50%,
+                    rgba(212, 175, 55, 0) 80%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2147483645;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
+        }
+
+        /* 3D Coin Left-to-Right (Y-Axis) Rotation Animation for Loader */
+        .coin-container {
+            perspective: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coin-3d {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            transform-style: preserve-3d;
+            animation: coinRotateY 2.2s infinite linear;
+        }
+
+        @keyframes coinRotateY {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .coin-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            backface-visibility: hidden;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .coin-front {
+            transform: translateZ(7px);
+        }
+
+        .coin-back {
+            transform: rotateY(180deg) translateZ(7px);
+        }
+
+        .coin-rim-seg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 12px;
+            margin: -6px 0 0 -7px;
+            background: linear-gradient(90deg, #8a6d1f, #f5dd8a 50%, #8a6d1f);
+            backface-visibility: hidden;
+        }
+
+        #loader {
+            transition: opacity 0.8s ease-out;
+        }
+
+        html {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #0b0b0b;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            text-shadow:
+                0 2px 10px rgba(0, 0, 0, 0.55),
+                0 1px 2px rgba(0, 0, 0, 0.7);
+            background-color: transparent;
+            color: #f5f2eb;
+            letter-spacing: 0.03em;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* Allow selection strictly at the Get a Quote section and below */
+        #contact,
+        #contact *,
+        #contact input,
+        #contact textarea,
+        #contact a {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            -webkit-touch-callout: default;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-serif {
+            font-family: "Bodoni Moda", serif;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        /* Fixed Background Video Container */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            background-color: #0b0b0b;
+        }
+
+        #scroll-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* --- LUXURY LIQUID GLASS CARDS --- */
+        .glass-card-hero {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(10px) saturate(200%);
+            -webkit-backdrop-filter: blur(10px) saturate(200%);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow:
+                0 35px 70px -15px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(212, 175, 55, 0.3);
+            background-image: linear-gradient(135deg,
+                    rgba(212, 175, 55, 0.12) 0%,
+                    rgba(18, 18, 18, 0.75) 100%);
+            color: #f9f6f0;
+            border-radius: 28px;
+            transform: translateZ(0);
+            width: 100%;
+        }
+
+        .glass-card-about {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(10px) saturate(190%);
+            -webkit-backdrop-filter: blur(10px) saturate(190%);
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            box-shadow:
+                0 35px 70px -15px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(197, 160, 89, 0.25);
+            background-image: linear-gradient(135deg,
+                    rgba(30, 45, 38, 0.25) 0%,
+                    rgba(18, 18, 18, 0.8) 100%);
+            color: #f9f6f0;
+            border-radius: 28px;
+            transform: translateZ(0);
+            width: 100%;
+        }
+
+        .glass-card-service {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(10px) saturate(200%);
+            -webkit-backdrop-filter: blur(10px) saturate(200%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow:
+                0 35px 70px -15px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(212, 175, 55, 0.22);
+            background-image: linear-gradient(135deg,
+                    rgba(212, 175, 55, 0.08) 0%,
+                    rgba(18, 18, 18, 0.75) 100%);
+            color: #f9f6f0;
+            border-radius: 28px;
+            transform: translateZ(0);
+            width: 100%;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-service:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            transform: translateY(-10px);
+            box-shadow: 0 45px 80px -12px rgba(10, 25, 18, 0.7);
+        }
+
+        .glass-card-why {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(10px) saturate(200%);
+            -webkit-backdrop-filter: blur(10px) saturate(200%);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow:
+                0 35px 70px -15px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(212, 175, 55, 0.25);
+            background-image: linear-gradient(135deg,
+                    rgba(25, 42, 32, 0.3) 0%,
+                    rgba(18, 18, 18, 0.8) 100%);
+            color: #f9f6f0;
+            border-radius: 28px;
+            transform: translateZ(0);
+            width: 100%;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-why:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            transform: translateY(-4px);
+        }
+
+        .glass-liquid {
+            background: rgba(18, 18, 18, 0.4);
+            background-image: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.15) 0%,
+                    rgba(255, 255, 255, 0.04) 40%,
+                    rgba(212, 175, 55, 0.1) 100%);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 18px;
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                inset 0 -1px 0 rgba(212, 175, 55, 0.2);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateZ(0);
+        }
+
+        .glass-liquid:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            will-change: opacity, transform;
+        }
+
+        /* --- HERO SHINE & TWINKLE STAR CSS --- */
+        .shine-wrap {
+            position: relative;
+        }
+
+        .twinkle-star {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            margin: -12px 0 0 -8px;
+            pointer-events: none;
+            opacity: 0;
+            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9)) drop-shadow(0 0 14px rgba(255, 246, 204, 0.8));
+        }
+
+        .shine {
+            position: relative;
+            width: fit-content;
+            text-shadow: none;
+            color: transparent;
+            background-color: #f5f6f6;
+            background-image: linear-gradient(45deg,
+                    rgba(212, 175, 55, 0) 0%,
+                    rgba(212, 175, 55, 0) 30%,
+                    #ffd700 47%,
+                    #b8860b 50%,
+                    #ffd700 53%,
+                    rgba(212, 175, 55, 0) 70%,
+                    rgba(212, 175, 55, 0) 100%);
+            background-repeat: no-repeat;
+            background-position: -9999px 0;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-stroke: 0.8px #d4af37;
+            text-stroke: 1.5px #d4af37;
+            filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+        }
+
+        #nav-logo {
+            transition: opacity 0.4s ease, transform 0.4s ease !important;
+        }
+
+        #nav-logo.is-hidden {
+            opacity: 0 !important;
+            transform: translateY(-20px) !important;
+            pointer-events: none;
+        }
+
+        /* Mobile-only video fade effect */
+        @media (max-width: 767px),
+        (pointer: coarse) {
+            #scroll-video {
+                transition: opacity 1s ease-in-out;
+                opacity: 1;
+            }
+
+            #scroll-video.mobile-video-blackout {
+                opacity: 0;
+            }
+        }
+
+        /* Instagram Explore Grid Container */
+        .explore-grid {
+            grid-auto-flow: dense;
+            --cell-h: 480px;
+            /* <- change this one number to resize everything */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            /* Slightly increased gap to showcase rounded corners */
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 5px;
+        }
+
+        /* Individual Grid Cell with Smooth Rounded Edges */
+        .grid-item {
+            position: relative;
+            width: 100%;
+            height: 390px;
+            overflow: hidden;
+            background-color: transparent;
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
+            border-radius: 12px;
+            /* Smooth rounded corners */
+        }
+
+        /* Asymmetric Instagram Explore pattern */
+        .grid-item.tall {
+            grid-row: span 2;
+            height: 800px;
+            /* 2 cells + 6px gap */
+        }
+
+        /* Image Wrapper with Parallax Effect */
+        .image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Images styled slightly larger than container with constant scale */
+        .image-wrapper img {
+            position: absolute;
+            top: -15%;
+            /* left: -15%; */
+            width: 130%;
+            height: 130%;
+            object-fit: cover;
+            will-change: transform;
+            transform: scale(1.15);
+            /* Default constant zoom */
+            transition: filter 0.3s ease;
+        }
+
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .explore-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+            }
+
+            .grid-item {
+                height: 130px;
+                border-radius: 8px;
+            }
+
+            .grid-item.tall {
+                height: 264px;
+            }
+        }
+
+        /* Dim every image while the cursor is over the grid, except the hovered one */
+        .grid-item {
+            transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .grid-item {
+            transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .explore-grid.has-focus .grid-item:not(.is-active) {
+            filter: brightness(0.85) saturate(0.5);
+            opacity: 0.7;
+        }
+
+        .explore-grid .grid-item.is-active {
+            filter: brightness(1.1);
+            opacity: 1;
+            transform: scale(1.02);
+            z-index: 2;
+        }
+
+        .explore-grid .grid-item:hover {
+            filter: brightness(1.1);
+            opacity: 1;
+            transform: scale(1.02);
+            z-index: 2;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+            width: 0;
+        }
+
+        .gallery-viewport {
+            /* padding: 60px; */
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            /* background: #121212; */
+
+            /* Allow wheel and touch gestures over the gallery */
+            touch-action: pan-y;
+        }
+
+        .gallery-viewport {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+        }
+
+        /* Transparent blue fade on all four edges */
+        /* Remove the blue overlay */
+        .gallery-viewport::after {
+            content: none;
+        }
+
+        /* Feather the gallery edges into transparency */
+        .gallery-viewport {
+            /* background-color: #121212; */
+            padding: 5px;
+            -webkit-mask-image: linear-gradient(to bottom,
+                    transparent 0%,
+                    black 12%,
+                    black 88%,
+                    transparent 100%);
+            mask-image: linear-gradient(to bottom,
+                    transparent 0%,
+                    black 12%,
+                    black 88%,
+                    transparent 100%);
+
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        }
+
+        /* Remove the previous blue overlay */
+        .gallery-viewport::after {
+            content: none;
+        }
+
+        #exploreGrid {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            will-change: transform;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .gallery-frame {
+            display: block;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .gallery-frame {
+            width: 100%;
+            height: 100vh;
+            border: 0;
+            display: block;
+            overflow: hidden;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .gallery-frame {
+            display: block;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .gallery-viewport {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #121212;
+
+            /* Do not capture or disable normal page scrolling */
+            touch-action: pan-y;
+        }
+
+        .gallery-track {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            will-change: transform;
+        }
+
+        .gallery-track>.explore-grid {
+            flex: 0 0 auto;
+            width: 100%;
+        }
+
+        .grid-item {
+            overflow: hidden;
+        }
+
+        .grid-item img.parallax-img {
+            transform: translate3d(0,
+                    var(--gallery-parallax-y, 0px),
+                    0);
+            will-change: transform;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen with Rotating Coin Logo -->
+    <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#121212]">
+        <div class="coin-container mb-6">
+            <div class="coin-3d" id="loader-coin">
+                <div class="coin-face coin-front">
+                    <img src="./logo.png" alt="Vireo Coin Logo" class="w-40 h-40 object-cover" draggable="false" />
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="./logo.png" alt="Vireo Coin Logo" class="w-40 h-40 object-cover" draggable="false" />
+                </div>
+            </div>
+        </div>
+        <p class="font-serif text-xl tracking-widest text-[#fceea7] mb-2 uppercase font-semibold">
+            Vireo
+        </p>
+        <p class="text-[11px] tracking-widest text-stone-300 uppercase mb-6 font-medium">
+            Crafting Space Since 2015
+        </p>
+
+        <div class="w-64 h-1 bg-[#121212] rounded-full overflow-hidden border border-[#d4af37]/20">
+            <div id="progress-bar"
+                class="h-full bg-gradient-to-r from-[#1c3024] to-[#d4af37] w-0 transition-all duration-300 ease-out">
+            </div>
+        </div>
+        <p id="progress-text" class="text-xs text-stone-300 mt-2 tracking-widest font-mono">
+            0%
+        </p>
+    </div>
+
+    <!-- Fixed Background Video Container -->
+    <div class="video-container">
+        <!-- <video id="scroll-video" src="./output-smooth.mp4" muted playsinline preload="auto"></video> -->
+         <!-- <video
+  id="scroll-video"
+  src="./output-smooth.mp4"
+  muted
+  playsinline
+  preload="metadata"
+></video> -->
+<video
+  id="scroll-video"
+  src="./output-smooth.mp4"
+  muted
+  playsinline
+  webkit-playsinline
+  autoplay
+   preload="auto"
+></video>
+    </div>
+
+    <!-- Scrollable HTML Content -->
+    <div class="content-layer">
+        <!-- Navbar -->
+        <!-- Responsive Navbar -->
+        <nav id="nav-logo"
+            class="fixed top-0 left-0 w-full p-4 md:p-8 flex justify-between items-center z-50 pointer-events-auto">
+
+            <!-- Logo -->
+            <a href="#home" aria-label="Vireo Home" class="relative z-10 flex-shrink-0">
+                <img src="./logo.png" alt="Vireo Logo"
+                    class="w-14 h-14 sm:w-20 sm:h-20 object-cover rounded-full border-2 border-[#d4af37] shadow-lg"
+                    draggable="false" />
+            </a>
+
+            <!-- Desktop Navigation: unchanged behavior -->
+            <div
+                class="glass-liquid px-6 py-3.5 hidden md:flex gap-8 text-xs tracking-widest uppercase font-semibold text-stone-100 shadow-xl border-[#d4af37]/40">
+                <a href="#home" class="hover:text-[#fceea7] transition-colors">Home</a>
+                <a href="#about" class="hover:text-[#fceea7] transition-colors">About Us</a>
+                <a href="#services" class="hover:text-[#fceea7] transition-colors">Services</a>
+                <a href="#why-us" class="hover:text-[#fceea7] transition-colors">Ethics & Vision</a>
+                <a href="portfolio.html" class="hover:text-[#fceea7] transition-colors">Portfolio</a>
+                <a href="#contact" class="hover:text-[#fceea7] transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-button" type="button"
+                class="md:hidden glass-liquid w-12 h-12 flex items-center justify-center text-[#fceea7] relative z-20"
+                aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+
+                <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+
+                <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 6l12 12M18 6L6 18" />
+                </svg>
+            </button>
+
+            <!-- Mobile Dropdown Menu -->
+            <div id="mobile-menu"
+                class="hidden md:hidden absolute top-full left-4 right-4 mt-2 p-5 glass-liquid flex-col gap-1 text-sm tracking-widest uppercase font-semibold text-stone-100 shadow-2xl"
+                style="background-color: rgba(12,12,12,0.97);">
+
+                <a href="#home" class="mobile-menu-link block py-3 px-3 hover:text-[#fceea7]">Home</a>
+                <a href="#about" class="mobile-menu-link block py-3 px-3 hover:text-[#fceea7]">About Us</a>
+                <a href="#services" class="mobile-menu-link block py-3 px-3 hover:text-[#fceea7]">Services</a>
+                <a href="#why-us" class="mobile-menu-link block py-3 px-3 hover:text-[#fceea7]">Ethics & Vision</a>
+                <a href="/portfolio.html" class="mobile-menu-link block py-3 px-3 hover:text-[#fceea7]">Portfolio</a>
+                <a href="#contact" class="mobile-menu-link block py-3 px-3 hover:text-[#fceea7]">Contact</a>
+            </div>
+        </nav>
+
+
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center px-4 sm:px-8 md:px-24 pt-32 pb-32 pointer-events-none">
+            <div class="w-full max-w-4xl fade-up gs-reveal pointer-events-auto p-6 sm:p-8 md:p-14">
+                <div
+                    class="inline-block text-[11px] uppercase tracking-widest text-[#fceea7] font-semibold mb-4 px-4 py-1.5 bg-[#1c3024]/80 rounded-full border border-[#d4af37]/40 shadow-sm">
+                    Great Spaces Begin with Great Minds
+                </div>
+                <div class="shine-wrap mb-6">
+                    <h1 data-blur="1" class="shine text-4xl sm:text-5xl md:text-7xl font-serif leading-tight font-bold">
+                        Interiors that<br />inspires Yo<span id="twinkle-t">u</span>
+                    </h1>
+                    <svg class="twinkle-star" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 0 C12.8 8 16 11.2 24 12 C16 12.8 12.8 16 12 24 C11.2 16 8 12.8 0 12 C8 11.2 11.2 8 12 0Z"
+                            fill="#fff6cc" />
+                    </svg>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#about"
+                        class="bg-gradient-to-r from-[#d4af37] to-[#e6ca65] text-stone-950 font-bold px-8 py-3.5 uppercase tracking-widest text-xs rounded-full hover:opacity-90 transition-all duration-300 shadow-xl">
+                        Discover More
+                    </a>
+                    <a href="#contact"
+                        class="glass-liquid px-8 py-3.5 uppercase tracking-widest text-xs text-white font-semibold hover:bg-white/15 transition-colors duration-300">
+                        Consultation
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about"
+            class="min-h-screen flex items-center justify-end px-4 sm:px-8 md:px-24 py-36 pointer-events-none">
+            <div
+                class="w-full max-w-2xl glass-card-about p-6 sm:p-8 md:p-14 shadow-2xl fade-up gs-reveal pointer-events-auto">
+                <div class="text-xs uppercase tracking-widest text-[#fceea7] mb-2 font-semibold">
+                    Architectural Distinction Since 2015
+                </div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif mb-6 text-white font-bold">
+                    The Art of Living
+                </h2>
+                <p class="text-stone-200 leading-relaxed mb-4 text-sm md:text-base font-normal">
+                    <strong class="text-white font-semibold">Vireo Modulars and Interiors</strong>
+                    stands at the pinnacle of luxury spatial design across Telangana and
+                    Andhra Pradesh. With an elite in-house collective of over 55 master
+                    artisans and visionary designers, we have transformed more than
+                    1,200 exclusive residential and commercial sanctuaries into timeless
+                    statements of elegance.
+                </p>
+                <p class="text-stone-200 leading-relaxed mb-8 text-sm md:text-base font-normal">
+                    We believe that true luxury lies in absolute harmony between
+                    aesthetics and ergonomic utility. Guided by our core belief of
+                    working together for a better built environment, every project is a
+                    bespoke masterpiece engineered to elevate human experiences.
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-8 border-t border-[#d4af37]/30 pt-8 mb-8">
+                    <div class="glass-liquid p-3 md:p-4 text-center">
+                        <div class="text-xl sm:text-2xl md:text-3xl font-serif text-[#fceea7] font-bold">1200+</div>
+                        <div
+                            class="text-[9px] md:text-[10px] uppercase tracking-widest text-stone-200 mt-1 font-semibold">
+                            Sanctuaries Crafted</div>
+                    </div>
+                    <div class="glass-liquid p-3 md:p-4 text-center">
+                        <div class="text-xl sm:text-2xl md:text-3xl font-serif text-[#fceea7] font-bold">55+</div>
+                        <div
+                            class="text-[9px] md:text-[10px] uppercase tracking-widest text-stone-200 mt-1 font-semibold">
+                            Master Artisans</div>
+                    </div>
+                    <div class="glass-liquid p-3 md:p-4 text-center col-span-2 md:col-span-1">
+                        <div class="text-xl sm:text-2xl md:text-3xl font-serif text-[#fceea7] font-bold">2015</div>
+                        <div
+                            class="text-[9px] md:text-[10px] uppercase tracking-widest text-stone-200 mt-1 font-semibold">
+                            Established</div>
+                    </div>
+                </div>
+
+                <button
+                    class="border border-[#d4af37]/50 text-[#fceea7] px-8 py-3 uppercase tracking-widest text-xs rounded-full hover:bg-[#1c3024] transition-colors duration-300 font-semibold shadow-md">
+                    Explore Our Legacy
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Services -->
+        <section id="services" class="py-36 px-4 sm:px-8 md:px-24">
+            <div class="max-w-2xl mx-auto text-center mb-16 fade-up gs-reveal">
+                <span class="text-xs uppercase tracking-widest text-[#fceea7] font-semibold">Bespoke Offerings</span>
+                <h2 class="text-4xl md:text-6xl font-serif mt-2 text-white font-bold">Our Craftsmanship</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div class="glass-card-service p-8 md:p-10 fade-up gs-reveal">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-[#1c3024] flex items-center justify-center mb-6 text-2xl border border-[#d4af37]/40 shadow-md text-[#d4af37]">
+                        💡</div>
+                    <h3 class="text-2xl font-serif mb-4 text-white font-bold">Ideas that Inspire</h3>
+                    <p class="text-stone-200 text-sm leading-relaxed font-normal">
+                        We conceptualize avant-garde spatial designs rooted in deep architectural intelligence, ensuring
+                        your environment reflects your distinct persona.
+                    </p>
+                </div>
+                <div class="glass-card-service p-8 md:p-10 fade-up gs-reveal">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-[#1c3024] flex items-center justify-center mb-6 text-2xl border border-[#d4af37]/40 shadow-md text-[#d4af37]">
+                        ⚙</div>
+                    <h3 class="text-2xl font-serif mb-4 text-white font-bold">Manufacturing with Precision</h3>
+                    <p class="text-stone-200 text-sm leading-relaxed font-normal">
+                        Equipped with state-of-the-art in-house production facilities, we engineer custom modular
+                        furnishings and architectural elements with uncompromising accuracy.
+                    </p>
+                </div>
+                <div class="glass-card-service p-8 md:p-10 fade-up gs-reveal">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-[#1c3024] flex items-center justify-center mb-6 text-2xl border border-[#d4af37]/40 shadow-md text-[#d4af37]">
+                        🏛️</div>
+                    <h3 class="text-2xl font-serif mb-4 text-white font-bold">Seamless Execution</h3>
+                    <p class="text-stone-200 text-sm leading-relaxed font-normal">
+                        From initial design visualization to white-glove site installation, our dedicated project
+                        management team guarantees immaculate delivery on schedule.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Ethos & Values Section -->
+        <section id="why-us" class="py-36 px-4 sm:px-8 md:px-24 pointer-events-auto">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 fade-up gs-reveal">
+                    <span class="text-xs uppercase tracking-widest text-[#fceea7] font-semibold">Core Ethics &
+                        Vision</span>
+                    <h2 class="text-4xl md:text-6xl font-serif mt-2 text-white font-bold">Principles of Excellence</h2>
+                    <p class="text-stone-200 text-sm mt-3 font-normal">
+                        Great spaces begin with great minds. Discover the philosophy that drives our relentless pursuit
+                        of perfection.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    <div class="glass-card-why p-8 md:p-10 fade-up gs-reveal">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-[#1c3024] flex items-center justify-center mb-6 text-2xl border border-[#d4af37]/40 shadow-md text-[#d4af37]">
+                            🎯</div>
+                        <h3 class="text-3xl font-serif mb-4 text-white font-bold">Our Mission</h3>
+                        <p class="text-stone-200 text-sm md:text-base leading-relaxed font-normal">
+                            To empower discerning clients with world-class interior architecture that seamlessly aligns
+                            with their conceptual identity and brand ethos through custom, out-of-the-box modular
+                            solutions. We champion sustainable practices, creating habitats that elevate work, life, and
+                            play.
+                        </p>
+                    </div>
+                    <div class="glass-card-why p-8 md:p-10 fade-up gs-reveal">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-[#1c3024] flex items-center justify-center mb-6 text-2xl border border-[#d4af37]/40 shadow-md text-[#d4af37]">
+                            👁️</div>
+                        <h3 class="text-3xl font-serif mb-4 text-white font-bold">Our Vision</h3>
+                        <p class="text-stone-200 text-sm md:text-base leading-relaxed font-normal">
+                            To remain the most sought-after luxury interior design authority across Telangana and Andhra
+                            Pradesh, recognized for establishing enduring brand value and inspiring sustainable,
+                            beautifully engineered built environments.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center max-w-xl mx-auto mb-10 fade-up gs-reveal">
+                    <span class="text-xs uppercase tracking-widest text-[#fceea7] font-semibold">Pillars of
+                        Integrity</span>
+                    <h3 class="text-3xl md:text-4xl font-serif text-white mt-1 font-bold">Our Guiding Values</h3>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            🤝</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Client-Centricity</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Placing your lifestyle aspirations
+                            at the very heart of our design process.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            💡</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Creative Vision</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Translating bold ideas into
+                            breathtaking, functional architectural realities.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            🏆</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Uncompromising Quality</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Adhering to rigorous standards of
+                            craftsmanship and material selection.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            🏛️</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Cultural Resonance</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Weaving personal heritage and
+                            lifestyle motifs into elite modern aesthetics.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            🌿</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Sustainable Living</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Designing eco-conscious spaces
+                            that respect and preserve nature.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            ⚖️</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Radical Integrity</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Maintaining absolute transparency
+                            and trust in all professional engagements.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            📈</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Continuous Evolution</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Embracing cutting-edge design
+                            trends and advanced manufacturing tech.</p>
+                    </div>
+                    <div class="glass-liquid p-6 border-[#d4af37]/30 fade-up gs-reveal">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-[#1c3024]/80 flex items-center justify-center mb-4 text-xl border border-[#d4af37]/30 text-[#d4af37]">
+                            ✨</div>
+                        <h4 class="font-serif text-lg text-white mb-2 font-bold">Immaculate Execution</h4>
+                        <p class="text-xs text-stone-200 font-normal leading-relaxed">Delivering perfection on every
+                            project, down to the final millimeter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Overview -->
+        <section id="projects" class="py-8 pointer-events-auto" style="background-color: #121212;">
+            <div class="mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 fade-up gs-reveal">
+                    <span class="text-xs uppercase tracking-widest text-[#fceea7] font-semibold">Curated
+                        Portfolio</span>
+                    <h2 class="text-4xl md:text-6xl font-serif mt-2 text-white font-bold">Holistic Masterpieces</h2>
+                    <p class="text-stone-200 text-sm mt-3 font-normal">
+                        Explore our premier residential and commercial interior installations curated for ultimate
+                        luxury.
+                    </p>
+                </div>
+                <!-- 3D Canvas -->
+                <!-- <canvas id="webgl-canvas"></canvas> -->
+
+                <!-- Scrollable HTML Content -->
+                <div class="content-layer">
+                    <!-- Navbar with High-Contrast Logo Badge -->
+
+                    <!-- Hero Section -->
+                    <div class="gallery-viewport" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="explore-grid" id="exploreGrid" style="padding-left: 0px; padding-right: 0px;"></div>
+                    </div>
+
+
+                    <!-- Lightbox Modal for Gallery with Perfectly Centered SVG Close Button -->
+                    <div id="lightbox-modal"
+                        class="fixed inset-0 z-[60] py-8 backdrop-blur-md hidden items-center justify-center p-4"
+                        role="dialog" aria-modal="true" aria-label="Image preview">
+                        <!-- <button id="lightbox-close" aria-label="Close"
+        class="absolute top-24 right-6 text-white hover:text-[#fceea7] transition-colors w-12 h-12 rounded-full glass-liquid flex items-center justify-center shadow-xl">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button> -->
+                        <img id="lightbox-img" src="" alt=""
+                            class="max-h-[88vh] max-w-full object-contain rounded-2xl border border-[#d4af37]/40 shadow-2xl" />
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+
+
+    </div>
+    </div>
+    </section>
+
+    <!-- Single Top-Level Lightbox Modal (Outside sections so it sits above Navbar) -->
+    <div id="lightbox-modal"
+        class="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <button id="lightbox-close" aria-label="Close"
+            class="absolute top-12 right-6 sm:top-10 sm:right-10 text-white hover:text-[#fceea7] transition-colors w-12 h-12 rounded-full glass-liquid flex items-center justify-center shadow-xl z-10 cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="max-w-5xl max-h-[90vh] flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Enlarged Project View"
+                class="max-h-[82vh] max-w-full object-contain rounded-2xl border border-[#d4af37]/40 shadow-2xl" />
+            <p id="lightbox-caption" class="font-serif text-2xl text-[#fceea7] mt-4 text-center font-bold empty:hidden">
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer / Contact Section -->
+    <!-- Footer / Contact Section -->
+    <section id="contact"
+        class="glass-liquid text-stone-200 pt-24 pb-8 px-4 sm:px-8 md:px-24 relative z-20 border-t border-[#d4af37]/30">
+        <div class="max-w-6xl mx-auto flex flex-col items-center justify-center mb-16 text-center">
+            <img src="./logo.png" alt="Vireo Logo Emblem"
+                class="w-28 h-28 object-cover rounded-full border-2 border-[#d4af37] shadow-2xl mb-4 pointer-events-none"
+                draggable="false" />
+            <h3 class="font-serif text-3xl text-[#fceea7] uppercase tracking-wider font-bold">Vireo Modulars and
+                Interiors</h3>
+            <p class="text-xs uppercase tracking-widest text-stone-300 mt-1 font-semibold">Crafting Space Since 2015
+            </p>
+        </div>
+
+        <div class="max-w-8xl mx-auto grid md:grid-cols-2 gap-8 mb-8 fade-up gs-reveal">
+            <div>
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif text-white mb-6 font-bold">Begin Your Journey
+                </h2>
+                <p class="text-xs uppercase tracking-widest text-[#fceea7] mb-3 font-semibold">Consultation &
+                    Inquiries</p>
+                <p class="text-base text-stone-200 max-w-sm mb-8 font-normal leading-relaxed">
+                    Ready to transform your sanctuary? Let our master designers bring your architectural vision to
+                    life.
+                </p>
+                <a href="tel:+919912342530"
+                    class="inline-block bg-gradient-to-r from-[#d4af37] to-[#e6ca65] text-stone-950 font-bold px-10 py-4 uppercase tracking-widest text-xs rounded-full hover:opacity-90 transition-colors shadow-2xl">
+                    Schedule Consultation
+                </a>
+            </div>
+            <div class="flex flex-col justify-center space-y-6 md:pl-12 md:border-l border-[#d4af37]/30">
+                <div class="glass-liquid p-5 border-[#d4af37]/30">
+                    <p class="text-[10px] uppercase tracking-widest text-[#fceea7] mb-1 font-semibold">Visit Our
+                        Studio</p>
+                    <p class="font-serif text-base text-white leading-relaxed font-normal">
+                        Bowrampet, opp. of DPS Road, Bachupally, Dundigal, Hyderabad, Telangana 500043
+                    </p>
+                    <a id="directions-link"
+                        href="https://www.google.com/maps/search/?api=1&query=Vireo%20Modulars%20and%20Interiors%2C%20Bowrampet%2C%20opp.%20of%20DPS%20Road%2C%20Bachupally%2C%20Dundigal%2C%20Hyderabad%2C%20Telangana%20500043"
+                        target="_blank" rel="noopener"
+                        class="inline-block mt-3 text-xs uppercase tracking-widest text-[#fceea7] font-semibold hover:underline">
+                        Get Directions →
+                    </a>
+                </div>
+                <div class="glass-liquid p-5 border-[#d4af37]/30">
+                    <p class="text-[10px] uppercase tracking-widest text-[#fceea7] mb-1 font-semibold">Direct Line
+                    </p>
+                    <a href="tel:+918919133404" class="font-serif text-xl text-white hover:underline font-normal">+91
+                        89191 33404</a>
+                </div>
+                <div class="glass-liquid p-5 border-[#d4af37]/30">
+                    <p class="text-[10px] uppercase tracking-widest text-[#fceea7] mb-1 font-semibold">Electronic
+                        Mail</p>
+                    <a href="mailto:vireointeriors@gmail.com"
+                        class="font-serif text-base text-white hover:underline font-normal">vireointeriors@gmail.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center border-t border-white/15 pt-8 text-xs text-stone-300 font-medium">
+            <p>©2015-2026 Vireo Modulars and Interiors. All Rights Reserved.</p>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+                class="mt-4 md:mt-0 uppercase tracking-widest hover:text-[#fceea7] transition-colors flex items-center gap-2 font-bold">
+                Scroll to Top ↑
+            </button>
+        </div>
+    </section>
+    </div>
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <!-- Main Logic -->
+    <!-- Add these MediaPipe scripts -->
+    <script type="module">
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Reveal on scroll
+        gsap.utils.toArray(".gs-reveal").forEach((elem) => {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                once: true,
+                onEnter: () =>
+                    gsap.to(elem, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                    }),
+            });
+        });
+
+        // Word-by-word blur reveal (footer text)
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document
+                .querySelectorAll("#contact h2, #contact h3, #contact p")
+                .forEach((el) => {
+                    const items = [];
+                    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+                    const nodes = [];
+                    while (walker.nextNode()) nodes.push(walker.currentNode);
+                    nodes.forEach((node) => {
+                        if (!node.nodeValue.trim()) return;
+                        const frag = document.createDocumentFragment();
+                        node.nodeValue.split(/(\s+)/).forEach((part) => {
+                            if (!part) return;
+                            if (/^\s+$/.test(part)) {
+                                frag.appendChild(document.createTextNode(" "));
+                                return;
+                            }
+                            const s = document.createElement("span");
+                            s.className = "bw";
+                            s.textContent = part;
+                            frag.appendChild(s);
+                            items.push(s);
+                        });
+                        node.parentNode.replaceChild(frag, node);
+                    });
+                    if (!items.length) return;
+                    gsap.set(items, {
+                        opacity: 0,
+                        y: 22,
+                        scale: 0.96,
+                        filter: "blur(14px)",
+                    });
+                    ScrollTrigger.create({
+                        trigger: el,
+                        start: "top 92%",
+                        once: true,
+                        onEnter: () =>
+                            gsap.to(items, {
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                                filter: "blur(0px)",
+                                duration: 0.9,
+                                ease: "power3.out",
+                                stagger: { amount: Math.min(1.2, items.length * 0.06) },
+                                clearProps: "all",
+                            }),
+                    });
+                });
+        }
+
+        // Directions link on Android
+        const link = document.getElementById("directions-link");
+        if (link && /Android/i.test(navigator.userAgent)) {
+            link.href =
+                "geo:0,0?q=" +
+                encodeURIComponent(
+                    "Vireo Modulars and Interiors, Bowrampet, opp. of DPS Road, Bachupally, Dundigal, Hyderabad, Telangana 500043",
+                );
+            link.removeAttribute("target");
+        }
+
+        // ---- Images: set tall: true on the ones that should span two rows ----
+        // const IMAGES = [
+        //   { src: "1.webp", alt: "Modern executive study", tall: true },
+        //   { src: "2.webp", alt: "Sliding wardrobe and loft" },
+        //   { src: "3.png", alt: "Contemporary kitchen" },
+        //   { src: "4.png", alt: "TV console unit" },
+        //   { src: "5.png", alt: "Master wardrobe suite" },
+        //   { src: "6.png", alt: "Designer bedroom", tall: true },
+        //   { src: "7.png", alt: "Custom wardrobe system" },
+        //   { src: "8.png", alt: "Modular kitchen" },
+        //   { src: "9.png", alt: "Crockery and display unit" },
+        //   { src: "10.png", alt: "Wooden partition", tall: true },
+        //   { src: "11.png", alt: "Living and dining hall" },
+        // ];
+
+        let IMAGES = [];
+
+        async function loadRandomGalleryImages() {
+            const grid = document.getElementById("exploreGrid");
+
+            try {
+                const response = await fetch("/api/random-images", {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API returned HTTP ${response.status}`);
+                }
+
+                const imagePaths = await response.json();
+
+                if (!imagePaths.length) {
+                    throw new Error("No JPG images returned by the server");
+                }
+
+                IMAGES = imagePaths.map((src, i) => ({
+                    src,
+                    alt: `Interior design project ${i + 1}`,
+                    tall: [0, 5, 9].includes(i)
+                }));
+
+                grid.innerHTML = IMAGES.map(({ src, alt, tall }, i) => `
+            <div class="grid-item${tall ? " tall" : ""}">
+                <div class="image-wrapper">
+                    <img
+                        src="${src}"
+                        alt="${alt}"
+                        class="parallax-img"
+                        loading="eager"
+                        decoding="async"
+                    />
+                </div>
+            </div>
+        `).join("");
+
+                // Wait until the images have loaded or failed.
+                await Promise.all(
+                    Array.from(grid.querySelectorAll("img")).map(img => {
+                        if (img.complete) {
+                            return Promise.resolve();
+                        }
+
+                        return new Promise(resolve => {
+                            img.addEventListener("load", resolve, { once: true });
+                            img.addEventListener("error", resolve, { once: true });
+                        });
+                    })
+                );
+
+                console.log("[Vireo gallery] Loaded", IMAGES.length, "images");
+
+                // Signal that the grid is ready for gallery initialization.
+                document.dispatchEvent(new Event("gallery-images-loaded"));
+
+            } catch (error) {
+                console.error("[Vireo gallery] Image loading failed:", error);
+            }
+        }
+
+
+        document.getElementById("exploreGrid").innerHTML = IMAGES.map(
+            ({ src, alt = "", tall }, i) => `
+    <div class="grid-item${tall ? " tall" : ""}">
+      <div class="image-wrapper">
+        <img src="${src}" alt="${alt.replace(/"/g, "&quot;")}"
+             class="parallax-img" loading="${i < 4 ? "eager" : "lazy"}" decoding="async" />
+      </div>
+    </div>`
+        ).join("");
+
+
+        // ---- Seamless auto-scrolling gallery ----
+        document.addEventListener("gallery-images-loaded", () => {
+            // Put your EXISTING seamless auto-scrolling gallery code here.
+            // Keep its existing variables and logic unchanged.
+            const viewport = document.querySelector(".gallery-viewport");
+            const originalGrid = document.getElementById("exploreGrid");
+
+            if (viewport && originalGrid) {
+                // Create a track containing two identical galleries.
+                const track = document.createElement("div");
+                track.className = "gallery-track";
+
+                originalGrid.replaceWith(track);
+                track.appendChild(originalGrid);
+
+                const clone = originalGrid.cloneNode(true);
+                clone.removeAttribute("id");
+                clone.setAttribute("aria-hidden", "true");
+
+                // Prevent duplicate images from receiving clicks or focus.
+                clone.querySelectorAll(".grid-item").forEach((item) => {
+                    item.style.pointerEvents = "none";
+                });
+
+                track.appendChild(clone);
+
+                let offset = 0;
+                let oneGridHeight = 0;
+                let previousTime = 0;
+                let pausedByHover = false;
+
+                // Pixels per second. Increase for faster movement.
+                const SPEED = 48 + 24;
+
+                function measureGallery() {
+                    oneGridHeight = originalGrid.getBoundingClientRect().height;
+                }
+
+                // Pause movement while someone is interacting with a photo.
+                // This does not prevent the mouse wheel from scrolling the page.
+                viewport.addEventListener("pointerenter", () => {
+                    pausedByHover = false;
+                });
+
+                viewport.addEventListener("pointerleave", () => {
+                    pausedByHover = false;
+                });
+
+                function animateGallery(time) {
+                    if (!previousTime) previousTime = time;
+
+                    // Cap delta to avoid jumps after a background tab resumes.
+                    const delta = Math.min((time - previousTime) / 1000, 0.04);
+                    previousTime = time;
+
+                    if (!pausedByHover && oneGridHeight > 0) {
+                        offset += SPEED * delta;
+
+                        // Wrap exactly at the height of the original gallery.
+                        if (offset >= oneGridHeight) {
+                            offset %= oneGridHeight;
+                        }
+
+                        track.style.transform =
+                            `translate3d(0, ${-offset}px, 0)`;
+                    }
+                    handleParallax();
+                    requestAnimationFrame(animateGallery);
+                }
+
+                // Measure after images load so the bottom images are included.
+                const images = originalGrid.querySelectorAll("img");
+                let pendingImages = images.length;
+
+                function imageSettled() {
+                    pendingImages = Math.max(0, pendingImages - 1);
+                    measureGallery();
+                }
+
+                images.forEach((img) => {
+                    if (img.complete) {
+                        // Already loaded or failed; both have settled.
+                        pendingImages = Math.max(0, pendingImages - 1);
+                    } else {
+                        img.addEventListener("load", imageSettled, { once: true });
+                        img.addEventListener("error", imageSettled, { once: true });
+                    }
+                });
+
+                // Start with a measured layout and keep it updated.
+                measureGallery();
+
+                if (window.ResizeObserver) {
+                    const galleryObserver = new ResizeObserver(measureGallery);
+                    galleryObserver.observe(originalGrid);
+                } else {
+                    window.addEventListener("resize", measureGallery);
+                }
+
+                requestAnimationFrame(animateGallery);
+            }
+
+        }, { once: true });
+
+        loadRandomGalleryImages();
+
+        // Parallax (only for cells near the screen)
+        const parallaxImages = document.querySelectorAll(".parallax-img");
+        // function handleParallax() {
+        //     const vh = window.innerHeight;
+        //     parallaxImages.forEach((img) => {
+        //         const r = img.closest(".grid-item").getBoundingClientRect();
+        //         if (r.bottom >= -100 && r.top <= vh + 100) {
+        //             const dy = (r.top + r.height / 2 - vh / 2) * 0.12;
+        //             img.style.transform = `translateY(${dy}px) scale(1.15)`;
+        //         }
+        //     });
+        // }
+          function handleParallax() {
+    const vh = window.innerHeight;
+
+    grid.querySelectorAll(".parallax-img").forEach((img) => {
+      const item = img.closest(".grid-item");
+      if (!item) return;
+
+      const r = item.getBoundingClientRect();
+
+      if (r.bottom >= -100 && r.top <= vh + 100) {
+        const dy = (r.top + r.height / 2 - vh / 2) * 0.12;
+        img.style.transform = `translateY(${dy}px) scale(1.15)`;
+      }
+    });
+  }
+
+        function updateGalleryParallax() {
+            const items = document.querySelectorAll(
+                "#exploreGrid .parallax-img"
+            );
+
+            const viewport = document.querySelector(".gallery-viewport");
+            if (!viewport) return;
+
+            const viewportRect = viewport.getBoundingClientRect();
+            const viewportCenter = viewportRect.top + viewportRect.height / 2;
+
+            items.forEach((img) => {
+                const item = img.closest(".grid-item");
+                if (!item) return;
+
+                const rect = item.getBoundingClientRect();
+                const itemCenter = rect.top + rect.height / 2;
+
+                // Relative position inside the visible gallery
+                const distance = (itemCenter - viewportCenter) / viewportRect.height;
+
+                // Subtle parallax movement
+                const offset = Math.max(-25, Math.min(25, distance * -35));
+
+                img.style.setProperty("--gallery-parallax-y", `${offset}px`);
+            });
+        }
+        lenis.on("scroll", handleParallax); // runs in step with Lenis, so no double listeners
+        window.addEventListener("load", handleParallax);
+        window.addEventListener("resize", handleParallax);
+        handleParallax();
+        // ---- Spotlight the image under the cursor, even while scrolling ----
+        if (matchMedia("(hover: hover)").matches) {
+            const grid = document.getElementById("exploreGrid");
+            let mx = -1,
+                my = -1,
+                current = null;
+
+            function updateSpotlight() {
+                if (mx < 0) return;
+                const el = document.elementFromPoint(mx, my);
+                const item = el ? el.closest(".grid-item") : null;
+                if (item === current) return;
+                if (current) current.classList.remove("is-active");
+                current = item;
+                if (item) item.classList.add("is-active");
+                grid.classList.toggle("has-focus", !!item);
+            }
+
+            window.addEventListener(
+                "mousemove",
+                (e) => {
+                    mx = e.clientX;
+                    my = e.clientY;
+                    updateSpotlight();
+                },
+                { passive: true },
+            );
+
+            // Re-check while the page scrolls under a stationary mouse
+            lenis.on("scroll", updateSpotlight);
+            window.addEventListener("scroll", updateSpotlight, { passive: true });
+
+            // Clear when the mouse leaves the window
+            document.addEventListener("mouseleave", () => {
+                mx = my = -1;
+                if (current) current.classList.remove("is-active");
+                current = null;
+                grid.classList.remove("has-focus");
+            });
+        }
+        // ---- Image popup ----
+        // ---- Image popup ----
+        const modal = document.getElementById("lightbox-modal");
+        const modalImg = document.getElementById("lightbox-img");
+        const navBar = document.getElementById("nav-logo");
+        const closeBtn = document.getElementById("lightbox-close");
+
+        function preventScroll(e) {
+            e.preventDefault();
+        }
+
+        function openLightbox(src, alt = "") {
+            modalImg.src = src;
+            modalImg.alt = alt;
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+
+            // 1. Hide Navbar completely so it never overlaps
+            if (navBar) navBar.classList.add("is-hidden");
+
+            // 2. Stop both Lenis instances & native scroll
+            lenis.stop();
+            if (window.mainLenis) window.mainLenis.stop();
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+
+            // 3. Block wheel and touchmove events on window
+            window.addEventListener("wheel", preventScroll, { passive: false });
+            window.addEventListener("touchmove", preventScroll, { passive: false });
+        }
+
+        function closeLightbox() {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            modalImg.src = "";
+
+            // 1. Restore Navbar
+            if (navBar) navBar.classList.remove("is-hidden");
+
+            // 2. Resume both Lenis instances & native scroll
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+            lenis.start();
+            if (window.mainLenis) window.mainLenis.start();
+
+            // 3. Remove scroll blockers
+            window.removeEventListener("wheel", preventScroll);
+            window.removeEventListener("touchmove", preventScroll);
+        }
+
+        // Expose globally in case inline handlers call it
+        window.openLightbox = openLightbox;
+        window.closeLightbox = closeLightbox;
+
+        document.querySelector(".gallery-viewport").addEventListener("click", (e) => {
+            const item = e.target.closest(".grid-item");
+            if (!item || item.closest(".gallery-track")?.children[1]?.contains(item)) {
+                return;
+            }
+            const img = item.querySelector("img");
+            if (img) openLightbox(img.currentSrc || img.src, img.alt);
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener("click", closeLightbox);
+        }
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeLightbox();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    </script>
+    <!-- 1. Custom Gold Cursor & Glowing Trail Script -->
+    <script>
+        (function () {
+            if (window.matchMedia("(pointer: coarse)").matches) return;
+
+            const cursor = document.createElement("div");
+            cursor.className = "custom-cursor";
+            cursor.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3L10.5 21L13.5 13.5L21 10.5L3 3Z" fill="#D4AF37" stroke="#FFF6CC" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>`;
+            document.body.appendChild(cursor);
+
+            const trailCount = 6;
+            const trails = [];
+            for (let i = 0; i < trailCount; i++) {
+                const t = document.createElement("div");
+                t.className = "custom-cursor-trail";
+                document.body.appendChild(t);
+                trails.push({ el: t, x: -100, y: -100 });
+            }
+
+            let mouseX = -100, mouseY = -100;
+            let cursorX = -100, cursorY = -100;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.35;
+                cursorY += (mouseY - cursorY) * 0.35;
+                cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+
+                let prevX = cursorX, prevY = cursorY;
+                trails.forEach((trail, index) => {
+                    trail.x += (prevX - trail.x) * (0.4 - index * 0.05);
+                    trail.y += (prevY - trail.y) * (0.4 - index * 0.05);
+                    trail.el.style.transform = `translate(${trail.x}px, ${trail.y}px) scale(${1 - index * 0.12})`;
+                    trail.el.style.opacity = `${(1 - index / trailCount) * 0.7}`;
+                    prevX = trail.x;
+                    prevY = trail.y;
+                });
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            const updateHoverTargets = () => {
+                const interactiveElements = document.querySelectorAll(
+                    "a, button, [onclick], input, textarea, .group"
+                );
+                interactiveElements.forEach((el) => {
+                    if (!el.dataset.cursorBound) {
+                        el.dataset.cursorBound = "true";
+                        el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+                        el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
+                    }
+                });
+            };
+            updateHoverTargets();
+            setInterval(updateHoverTargets, 1000);
+        })();
+    </script>
+
+    <!-- 2. Lightbox Script -->
+
+    <!-- 3. Main Scroll, Native Video Loading, Shine & Word-Blur Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Build 3D Coin Rim Segments
+        (function buildCoinEdge() {
+            const coin = document.getElementById("loader-coin");
+            if (!coin) return;
+            const N = 48;
+            const RADIUS = 80;
+            for (let i = 0; i < N; i++) {
+                const seg = document.createElement("div");
+                seg.className = "coin-rim-seg";
+                const angle = (360 / N) * i;
+                seg.style.transform = `rotateZ(${angle}deg) rotateY(90deg) translateZ(${RADIUS}px)`;
+                coin.appendChild(seg);
+            }
+        })();
+
+        // Smooth Scrolling (Lenis) with native touch support enabled
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            smoothTouch: true,
+            touchMultiplier: 2,
+        });
+        window.mainLenis = lenis; // <-- Add this single line
+
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.lagSmoothing(0);
+
+        // Section Card Reveal (.gs-reveal)
+        gsap.utils.toArray(".gs-reveal").forEach(function (elem) {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                onEnter: function () {
+                    gsap.to(elem, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                        overwrite: "auto",
+                    });
+                },
+            });
+        });
+
+        // Staggered Reveal for Portfolio Gallery Cards
+        const portfolioCards = gsap.utils.toArray(".portfolio-card");
+        if (portfolioCards.length > 0) {
+            gsap.set(portfolioCards, { y: 35, opacity: 0 });
+            ScrollTrigger.create({
+                trigger: "#portfolio-grid",
+                start: "top 82%",
+                once: true,
+                onEnter: () => {
+                    gsap.to(portfolioCards, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.9,
+                        stagger: 0.1,
+                        ease: "power3.out",
+                    });
+                },
+            });
+        }
+
+        // Word-by-Word Blur Reveal Animation
+        (function () {
+            if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+            const targets = document.querySelectorAll(
+                'h1,h2,h3,h4,p,strong,a,button,[class*="uppercase"],.glass-pill > div'
+            );
+
+            targets.forEach((el) => {
+                if (el.closest("nav,#loader,#tune-panel,.tab-content,#projects,[data-blur]")) return;
+                el.dataset.blur = "1";
+
+                const from = { opacity: 0, y: 22, scale: 0.96, filter: "blur(14px)" };
+                let items;
+
+                if (el.matches('[class*="hover:underline"]')) {
+                    gsap.set(el, { display: "inline-block" });
+                    items = [el];
+                } else {
+                    items = [];
+                    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+                    const nodes = [];
+                    while (walker.nextNode()) nodes.push(walker.currentNode);
+                    nodes.forEach((node) => {
+                        if (!node.nodeValue.trim()) return;
+                        const frag = document.createDocumentFragment();
+                        node.nodeValue.split(/(\s+)/).forEach((part) => {
+                            if (!part) return;
+                            if (/^\s+$/.test(part)) {
+                                frag.appendChild(document.createTextNode(" "));
+                                return;
+                            }
+                            const s = document.createElement("span");
+                            s.className = "bw";
+                            s.textContent = part;
+                            frag.appendChild(s);
+                            items.push(s);
+                        });
+                        node.parentNode.replaceChild(frag, node);
+                    });
+                }
+                if (!items.length) return;
+
+                gsap.set(items, from);
+                ScrollTrigger.create({
+                    trigger: el,
+                    start: "top 92%",
+                    once: true,
+                    onEnter: () => {
+                        gsap.to(items, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
+                            duration: 0.9,
+                            ease: "power3.out",
+                            stagger: { amount: Math.min(1.2, items.length * 0.06) },
+                            clearProps: "all",
+                        });
+                    },
+                });
+            });
+
+            ScrollTrigger.refresh();
+        })();
+
+        // Hero Heading Gradient Shine & Sparkle Star Animation
+        const shineEl = document.querySelector(".shine");
+        const starEl = document.querySelector(".twinkle-star");
+        const tEl = document.getElementById("twinkle-t");
+        const shineState = { p: 0 };
+        const EXTRA = 140;
+        const STAR_X = 0.8;
+        const STAR_Y = 0.4;
+        const TWINKLE_AT = 0.68;
+        let twinkled = false;
+
+        function placeStar() {
+            if (!shineEl || !starEl || !tEl) return;
+            const wrap = shineEl.parentElement.getBoundingClientRect();
+            const r = tEl.getBoundingClientRect();
+            starEl.style.left = r.left - wrap.left + r.width * STAR_X + "px";
+            starEl.style.top = r.top - wrap.top + r.height * STAR_Y + "px";
+        }
+
+        function twinkle() {
+            placeStar();
+            gsap.killTweensOf(starEl);
+            gsap.timeline()
+                .fromTo(
+                    starEl,
+                    { opacity: 0, scale: 0, rotation: 0 },
+                    {
+                        opacity: 1,
+                        scale: 1.2,
+                        rotation: 90,
+                        duration: 0.4,
+                        ease: "power2.out",
+                    }
+                )
+                .to(starEl, {
+                    opacity: 0,
+                    scale: 0,
+                    rotation: 180,
+                    duration: 0.5,
+                    ease: "power2.in",
+                });
+        }
+
+        gsap.to(shineState, {
+            p: 1,
+            duration: 3,
+            ease: "none",
+            repeat: -1,
+            repeatDelay: 2,
+            delay: 1.0,
+            onUpdate: () => {
+                const h = shineEl.offsetHeight;
+                const tile = h + EXTRA;
+                const start = -tile;
+                const end = shineEl.offsetWidth;
+                shineEl.style.backgroundSize = tile + "px 100%";
+                shineEl.style.backgroundPosition =
+                    start + (end - start) * shineState.p + "px 0";
+
+                if (!twinkled && shineState.p >= TWINKLE_AT) {
+                    twinkled = true;
+                    twinkle();
+                }
+            },
+            onRepeat: () => {
+                twinkled = false;
+            },
+        });
+        window.addEventListener("resize", placeStar);
+
+        // Hide floating navbar logo when footer reaches top
+        const navLogo = document.getElementById("nav-logo");
+        ScrollTrigger.create({
+            trigger: "#contact",
+            start: "top 110px",
+            end: "bottom top",
+            onToggle: (self) => navLogo.classList.toggle("is-hidden", self.isActive),
+        });
+
+
+        // 4. Mobile autoplay + fade; desktop scroll-driven video
+        const video = document.getElementById("scroll-video");
+        const loaderEl = document.getElementById("loader");
+        const progressBar = document.getElementById("progress-bar");
+        const progressText = document.getElementById("progress-text");
+
+        const mobileVideoMode = window.matchMedia(
+            "(max-width: 767px), (pointer: coarse) and (hover: none)"
+        ).matches;
+
+        // let targetTime = 0;
+        let currentTime = 0;
+        let videoReady = false;
+        // let lastScrollTop = 0;
+        let scrollVelocity = 0;
+        let mobileFadeTimer = null;
+        let mobileFadeVisible = true;
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.setAttribute("muted", "");
+        video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.load();
+        video.setAttribute("webkit-playsinline", "");
+
+        // Sync loader progress with native video buffering
+        video.addEventListener("progress", () => {
+            if (video.buffered.length > 0 && video.duration) {
+                const bufferedEnd =
+                    video.buffered.end(video.buffered.length - 1);
+                const pct = Math.min(
+                    Math.round((bufferedEnd / video.duration) * 100),
+                    100
+                );
+                progressBar.style.width = pct + "%";
+                progressText.innerText = pct + "%";
+            }
+        });
+
+        video.addEventListener("loadedmetadata", dismissLoader);
+video.addEventListener("loadeddata", dismissLoader);
+video.addEventListener("canplay", dismissLoader);
+
+        function dismissLoader() {
+            if (videoReady) return;
+            videoReady = true;
+
+            if (mobileVideoMode) {
+                video.loop = true;
+                video.play().catch((err) => {
+                    console.warn(
+                        "[Vireo video] Mobile autoplay failed:",
+                        err
+                    );
+                });
+            } else {
+                video.pause();
+                video.currentTime = 0.001;
+            }
+
+            progressBar.style.width = "100%";
+            progressText.innerText = "100%";
+
+            setTimeout(() => {
+                loaderEl.style.opacity = "0";
+                setTimeout(() => {
+                    loaderEl.style.display = "none";
+                }, 800);
+            }, 300);
+
+            if (mobileVideoMode) {
+                startMobileFadeCycle();
+            }
+        }
+
+        video.addEventListener("loadeddata", dismissLoader);
+        video.addEventListener("canplay", dismissLoader);
+        video.addEventListener("canplaythrough", dismissLoader);
+
+        // Safety fallback for slow-loading video
+        // Safety fallback: never leave the full-screen loader stuck.
+function forceHideLoader(reason) {
+    console.warn("[Vireo video] Hiding loader fallback:", reason, {
+        readyState: video.readyState,
+        networkState: video.networkState,
+        duration: video.duration,
+        source: video.currentSrc,
+        errorCode: video.error ? video.error.code : null,
+        errorMessage: video.error ? video.error.message : null
+    });
+
+    loaderEl.style.opacity = "0";
+    loaderEl.style.pointerEvents = "none";
+
+    window.setTimeout(() => {
+        loaderEl.style.display = "none";
+    }, 850);
+}
+
+// Hide the loader immediately if the browser reports a media error.
+video.addEventListener("error", () => {
+    if (!videoReady) {
+        forceHideLoader("video-error");
+    }
+}, { once: true });
+
+// Do not wait forever for loadeddata/canplay.
+window.setTimeout(() => {
+    if (videoReady) return;
+
+    forceHideLoader("12-second-timeout");
+}, 12000);
+
+        // Mobile: fade video out and back in every 3 seconds.
+        // CSS transition controls the fade duration.
+        function startMobileFadeCycle() {
+            if (mobileFadeTimer) return;
+
+            mobileFadeTimer = setInterval(() => {
+                mobileFadeVisible = !mobileFadeVisible;
+                video.classList.toggle(
+                    "mobile-video-blackout",
+                    !mobileFadeVisible
+                );
+            }, 4000);
+        }
+
+        // Desktop-only scroll tracking
+        // Desktop: video moves only while scrolling.
+        // Mobile: existing loop playback remains unchanged.
+
+        let isDesktopVideoReady = false;
+
+        // Desktop: video scrubs with scrolling and pauses when scrolling stops.
+        // Mobile: existing autoplay, loop, and fade remain unchanged.
+
+        let scrollStopTimer = null;
+        let desktopScrollActive = false;
+        const MIN_FRAME_STEP = 1 / 20; // Ignore changes smaller than 0.05 seconds
+        // let lastAcceptedTargetTime = 0;
+
+
+        // Desktop-only, one-direction video scrubbing.
+        // Mobile autoplay and fade logic above remains unchanged.
+
+        // let scrollStopTimer = null;
+        // let desktopScrollActive = false;
+
+        // const MIN_FRAME_STEP = 1 / 20; // Ignore changes smaller than 50 ms
+        const MIN_SCROLL_DELTA = 3;     // Ignore tiny scroll movements
+        const STOP_DELAY = 120;
+
+        let lastScrollTop = 0;
+        let targetTime = 0;
+        let lastAcceptedTargetTime = 0;
+        let lastAppliedTime = -1;
+
+        function handleScrollPosition(scrollTop) {
+            if (
+                mobileVideoMode ||
+                !videoReady ||
+                !Number.isFinite(video.duration) ||
+                video.duration <= 0
+            ) {
+                return;
+            }
+
+            const scrollDelta = scrollTop - lastScrollTop;
+
+            // Ignore tiny movements, but update the reference position
+            // so small movements do not accumulate into jitter.
+            if (Math.abs(scrollDelta) < MIN_SCROLL_DELTA) {
+                clearTimeout(scrollStopTimer);
+                scrollStopTimer = setTimeout(() => {
+                    desktopScrollActive = false;
+                    video.pause();
+                }, STOP_DELAY);
+
+                lastScrollTop = scrollTop;
+                return;
+            }
+
+            lastScrollTop = scrollTop;
+
+            const maxScroll =
+                document.documentElement.scrollHeight - window.innerHeight;
+
+            if (maxScroll <= 0) return;
+
+            const scrollFraction = Math.min(
+                Math.max((scrollTop / maxScroll) * 0.5, 0),
+                1
+            );
+
+            const candidateTime = scrollFraction * video.duration;
+
+            // Only accept meaningful changes to the target frame.
+            if (
+                Math.abs(candidateTime - lastAcceptedTargetTime) >=
+                MIN_FRAME_STEP
+            ) {
+                targetTime = candidateTime;
+                lastAcceptedTargetTime = candidateTime;
+                desktopScrollActive = true;
+            }
+
+            // Desktop video must never play freely.
+            video.pause();
+
+            clearTimeout(scrollStopTimer);
+            scrollStopTimer = setTimeout(() => {
+                desktopScrollActive = false;
+                video.pause();
+            }, STOP_DELAY);
+        }
+
+        if (!mobileVideoMode) {
+            video.loop = false;
+            video.pause();
+
+            video.addEventListener("play", () => {
+                video.pause();
+            });
+
+            lenis.on("scroll", (e) => {
+                handleScrollPosition(e.scroll);
+            });
+        }
+
+        // Keep the existing Lenis animation loop.
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+
+            if (
+                mobileVideoMode ||
+                !videoReady ||
+                !Number.isFinite(video.duration) ||
+                video.duration <= 0 ||
+                !desktopScrollActive
+            ) {
+                return;
+            }
+
+            const diff = targetTime - video.currentTime;
+
+            // Stop when the difference is too small.
+            if (Math.abs(diff) < MIN_FRAME_STEP) {
+                return;
+            }
+
+            // Do not repeatedly issue seeks while the previous seek
+            // is still being processed.
+            if (video.seeking) {
+                return;
+            }
+
+            const nextTime = Math.max(
+                0,
+                Math.min(targetTime, video.duration)
+            );
+
+            // Seek directly to the target instead of playing or
+            // incrementally moving currentTime in both directions.
+            if (Math.abs(nextTime - lastAppliedTime) >= MIN_FRAME_STEP) {
+                lastAppliedTime = nextTime;
+                video.currentTime = nextTime;
+            }
+        });
+
+
+
+        window.addEventListener("pagehide", () => {
+            if (mobileFadeTimer) {
+                clearInterval(mobileFadeTimer);
+                mobileFadeTimer = null;
+            }
+        });
+
+
+    </script>
+    <script>
+        (function () {
+            const menuButton = document.getElementById("mobile-menu-button");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const openIcon = document.getElementById("menu-open-icon");
+            const closeIcon = document.getElementById("menu-close-icon");
+
+            if (!menuButton || !mobileMenu) {
+                console.error("[Vireo nav] Mobile navigation elements not found.");
+                return;
+            }
+
+            function setMenuOpen(open) {
+                mobileMenu.classList.toggle("hidden", !open);
+                mobileMenu.classList.toggle("flex", open);
+
+                openIcon.classList.toggle("hidden", open);
+                closeIcon.classList.toggle("hidden", !open);
+
+                menuButton.setAttribute("aria-expanded", String(open));
+                menuButton.setAttribute(
+                    "aria-label",
+                    open ? "Close navigation menu" : "Open navigation menu"
+                );
+            }
+
+            menuButton.addEventListener("click", function (event) {
+                event.stopPropagation();
+
+                const isOpen =
+                    menuButton.getAttribute("aria-expanded") === "true";
+
+                setMenuOpen(!isOpen);
+            });
+
+            // Close after selecting a navigation link.
+            mobileMenu.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    setMenuOpen(false);
+                });
+            });
+
+            // Close when tapping outside the menu.
+            document.addEventListener("click", function (event) {
+                if (
+                    !mobileMenu.contains(event.target) &&
+                    !menuButton.contains(event.target)
+                ) {
+                    setMenuOpen(false);
+                }
+            });
+
+            // Close when switching to desktop width.
+            window.addEventListener("resize", function () {
+                if (window.innerWidth >= 768) {
+                    setMenuOpen(false);
+                }
+            });
+
+            console.log("[Vireo nav] Mobile navigation initialized.");
+        })();
+    </script>
+
+</body>
+
+</html>
